@@ -8,9 +8,9 @@ from PIL import Image
 def load_model(filename: str):
     return YOLO(filename)
 
-def predict(model):
-    im1 = Image.open("PR_1.jpg")
-    results = model.predict(source=im1)  # save plotted images
+def predict(model, filename: str):
+    image = Image.open(filename)
+    results = model.predict(source=image)  # save plotted images
     lights = []
     for result in results:
         for box in result.boxes:
@@ -19,5 +19,5 @@ def predict(model):
     lights = sorted(lights, key=itemgetter(1))
     for i in range(len(lights)):
         lights[i] = lights[i][0]
-    print(lights)
+    print(lights, len(lights))
     return lights

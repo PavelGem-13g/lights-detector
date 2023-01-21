@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import time
 
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QLabel
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QLabel, QPushButton
 from PyQt5.QtGui import QIcon, QPixmap
+from ultralytics import YOLO
+import cv2
+
+
+import neural
 
 
 class MyMainWindow(QMainWindow):
@@ -12,6 +19,9 @@ class MyMainWindow(QMainWindow):
         super().__init__()
 
         self.initUI()
+
+        self.model = neural.load_model('model.pt')
+        self.camera = cv2.VideoCapture(1)
 
         self.setGeometry(0, 0, 500, 500)
         self.setWindowTitle('Lights detector')
@@ -53,6 +63,22 @@ class MyMainWindow(QMainWindow):
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(exitAction)
 
+        button = QPushButton('PyQt5 button', self)
+        button.setToolTip('This is an example button')
+        button.move(100, 70)
+        button.clicked.connect(self.on_click)
+
+    def on_click(self):
+        print('Click')
+        ret, frame = self.camera.read()
+        if not ret:
+            print("failed to grab frame")
+        cv2.imshow("test", frame)
+        cv2.waitKey(1)
+        img_name = "opencv_frame_{}.png".format(0)
+        cv2.imwrite(img_name, frame)
+        self.update_colors(neural.predict(self.model, img_name))
+
     def change_color(self, label:QLabel, color):
         if color==0:
             label.setStyleSheet("background-color: white")
@@ -62,4 +88,7 @@ class MyMainWindow(QMainWindow):
     def update_colors(self, lights: list):
         for i in range(len(lights)):
             self.change_color(self.lightLables[i], lights[i])
-        #self.update_colors(neural.predict(main.model))
+        self.update()
+        #cv2.waitkey(50)
+        #QTimer.singleShot(4, self.update_colors(neural.predict(self.model)))
+        #self.update_colors(neural.predict(self.model))
