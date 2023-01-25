@@ -21,7 +21,7 @@ class MyMainWindow(QMainWindow):
         self.initUI()
 
         self.model = neural.load_model('model.pt')
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(2)
 
         self.setGeometry(0, 0, 500, 500)
         self.setWindowTitle('Lights detector')
@@ -86,9 +86,19 @@ class MyMainWindow(QMainWindow):
             label.setStyleSheet("background-color: red")
 
     def update_colors(self, lights: list):
-        for i in range(len(lights)):
+        ret, frame = self.camera.read()
+        if not ret:
+            print("failed to grab frame")
+        cv2.imshow("test", frame)
+        cv2.waitKey(1)
+        img_name = "opencv_frame_{}.png".format(0)
+        cv2.imwrite(img_name, frame)
+
+        print('Длина ',len(self.lightLables))
+        for i in range(min(len(self.lightLables), len(lights))):
             self.change_color(self.lightLables[i], lights[i])
-        self.update()
+        #self.update()
+        self.update_colors(neural.predict(self.model, img_name))
         #cv2.waitkey(50)
         #QTimer.singleShot(4, self.update_colors(neural.predict(self.model)))
         #self.update_colors(neural.predict(self.model))

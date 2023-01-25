@@ -7,7 +7,7 @@ import cameraTest
 import neural
 from myMainWindow import MyMainWindow
 
-print(cameraTest.list_ports())
+#print(cameraTest.list_ports())
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MyMainWindow()
