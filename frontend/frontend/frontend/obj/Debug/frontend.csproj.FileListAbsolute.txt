@@ -1,0 +1,14 @@
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\frontend.exe.config
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\frontend.exe
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\frontend.pdb
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.AssemblyReference.cache
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.SuggestedBindingRedirects.cache
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.Form1.resources
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.Properties.Resources.resources
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.GenerateResource.cache
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.CoreCompileInputs.cache
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.exe
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.pdb
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\Newtonsoft.Json.dll
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\Newtonsoft.Json.xml
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.CopyComplete
