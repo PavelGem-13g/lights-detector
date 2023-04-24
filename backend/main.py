@@ -30,12 +30,11 @@ app = Flask(__name__)
 model = neural.load_model('model.pt')
 #cameraTest.list_ports()
 camera = cv2.VideoCapture(1)
-info = []
 
 
 @app.route("/")
 def hello_world():
-    detect()
+    info = detect()
     return jsonify(
         config="DE10LITE",
         info=info)
@@ -51,7 +50,7 @@ def detect():
     cv2.waitKey(1)
     img_name = "opencv_frame_{}.png".format(0)
     cv2.imwrite(img_name, frame)
-    info = neural.predict(model, img_name)
+    return neural.predict(model, img_name)
 
 
 if __name__ == "__main__":

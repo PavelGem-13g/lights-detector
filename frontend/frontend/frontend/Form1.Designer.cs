@@ -68,14 +68,12 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::frontend.Properties.Resources.DE10Lite_копия;
             this.pictureBox1.Location = new System.Drawing.Point(15, 27);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(526, 436);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // menuStrip1
             // 
@@ -109,6 +107,7 @@
             this.buttonEmulatorToolStripMenuItem.Name = "buttonEmulatorToolStripMenuItem";
             this.buttonEmulatorToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.buttonEmulatorToolStripMenuItem.Text = "Button Emulator";
+            this.buttonEmulatorToolStripMenuItem.Click += new System.EventHandler(this.buttonEmulatorToolStripMenuItem_Click);
             // 
             // Form1
             // 
