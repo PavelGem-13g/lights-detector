@@ -1,9 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +17,8 @@ namespace frontend
         List<CheckBox> lightsCheckBoxes;
         InputInformation inputInformation;
         ButtonEmulator buttonEmulator;
+        ScriptInput scriptInput;
+
 
         public ButtonEmulator ButtonEmulator 
         {
@@ -35,8 +40,12 @@ namespace frontend
                 lightsPanel.Controls.Add(checkbox);
             }
             lightsPanel.Dispose();
-            pictureBox1.Image = new Bitmap("Y:\\Git\\lights-detector\\frontend\\frontend\\frontend\\design\\DE10Lite копия.jpg");
-            Draw();
+            pictureBox1.Image = new Bitmap("design/DE10Lite копия.jpg");
+
+            buttonEmulator = new ButtonEmulator();
+            scriptInput = new ScriptInput();
+
+            RunPython.sciptCommand = ConfigurationManager.AppSettings.Get("serverCommand");
         }
 
         private async Task get_infoAsync()
@@ -59,7 +68,7 @@ namespace frontend
         }
         void UpdateLights()
         {
-            pictureBox1.Image = new Bitmap("Y:\\Git\\lights-detector\\frontend\\frontend\\frontend\\design\\DE10Lite копия.jpg");
+            pictureBox1.Image = new Bitmap("design/DE10Lite копия.jpg");
             Graphics g = Graphics.FromImage(pictureBox1.Image);
             for (int i = 0; i < inputInformation.info.Length && i < lightsCheckBoxes.Count; i++)
             {
@@ -91,18 +100,54 @@ namespace frontend
                 }
             }
         }
-
-        void Draw()
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            //g.FillRectangle(Brushes.Green, new Rectangle(10, 10, 20, 20));
-            //pictureBox1.Invalidate();
-        }
-
         private void buttonEmulatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            buttonEmulator = new ButtonEmulator();
+            if (buttonEmulator.IsDisposed)
+            {
+                buttonEmulator = new ButtonEmulator();
+            }
             buttonEmulator.Show();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RunPython.Start(new string[1]);
+        }
+
+        private void scriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (scriptInput.IsDisposed)
+            {
+                scriptInput = new ScriptInput();
+            }
+            scriptInput.Show();
+        }
+    }
+
+    public static class RunPython
+    {
+        static Process process;
+        public static string sciptCommand;
+
+        public static void Start(string[] args)
+        {
+            if (sciptCommand.Length > 0)
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = sciptCommand,//@"cd Y:\Git\lights-detector\backend\ ; .\backend\venv\Scripts\Activate.ps1 ; .\main.py",//sciptCommand,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true
+                };
+                process = new Process() { StartInfo = processStartInfo };
+                process.Start();
+            }
         }
     }
 }

@@ -13,3 +13,5 @@ Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\Newtonsoft.Json.dll
 Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\Newtonsoft.Json.xml
 Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.csproj.CopyComplete
 Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.ButtonEmulator.resources
+Y:\Git\lights-detector\frontend\frontend\frontend\bin\Debug\design\DE10Lite копия.jpg
+Y:\Git\lights-detector\frontend\frontend\frontend\obj\Debug\frontend.ScriptInput.resources

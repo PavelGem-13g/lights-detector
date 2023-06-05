@@ -1,35 +1,12 @@
-import sys
-
 import cv2
 
 import cameraTest
 import neural
+from flask import Flask, jsonify
 
-from flask import Flask
-from flask import jsonify
-
-import asyncio
-
-# if __name__ == "__main__":
-#     app = QApplication(sys.argv)
-#     window = MyMainWindow()
-#     sys.exit(app.exec_())
-
-'''model = neural.load_model('model.pt')
-start_time = time.time()
-neural.predict(model)
-
-print("--- %s seconds ---" % (time.ti
-me() - start_time))'''
-
-# app = Flask(__name__)
-# model = neural.load_model('model.pt')
-# cameraTest.list_ports()
-# camera = cv2.VideoCapture(2)
 app = Flask(__name__)
 model = neural.load_model('model.pt')
-#cameraTest.list_ports()
-camera = cv2.VideoCapture(1)
+camera = []
 
 
 @app.route("/")
@@ -54,5 +31,7 @@ def detect():
 
 
 if __name__ == "__main__":
-    #detect()
+    cameraTest.list_ports()
+    print("Enter port number")
+    camera = cv2.VideoCapture(int(input()))
     app.run()
